@@ -2,7 +2,7 @@ const knex = require("../conexao");
 
 const listasModulos = async (req, res) => {
   try{
-    const modulos = await knex('modulos');
+    const modulos = await knex('modulos').orderBy('nome');
 
     res.json(modulos);
   }catch(error) {
@@ -58,7 +58,7 @@ const atualizarModulo = async (req, res) => {
 }
 
 const deletarModulo = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
 
   try{
     const modulo = await knex('modulos').where({id: id});

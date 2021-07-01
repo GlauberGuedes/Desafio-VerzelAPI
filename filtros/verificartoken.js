@@ -4,7 +4,7 @@ const knex = require("../conexao");
 
 const verificarToken = async (req, res, next) => {
   const { authorization } = req.headers;
-
+  
   if (!authorization) {
     return res.status(404).json("O token não foi informado");
   }
@@ -19,7 +19,6 @@ const verificarToken = async (req, res, next) => {
     if(!usuario) {
       return res.status(400).json("Usuário não encontrado.");
     }
-
     next();
   } catch (error) {
     return res.status(400).json(error.message);
