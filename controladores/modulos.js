@@ -4,6 +4,10 @@ const listasModulos = async (req, res) => {
   try{
     const modulos = await knex('modulos').orderBy('nome');
 
+    for(const modulo of modulos) {
+      const aulas = await knex('aulas').where('modulo_id', modulo.id);
+      modulo.aulas = aulas;
+    }
     res.json(modulos);
   }catch(error) {
     return res.status(400).json(error.message)

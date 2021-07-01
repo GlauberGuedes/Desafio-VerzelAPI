@@ -62,7 +62,7 @@ const atualizarAula = async (req, res) => {
       if(!verificarModulo) {
         return res.status(404).json('Módulo informado não foi encontrado.');
       }
-      const aulaAtualizada = await knex('aulas').update({nome, data, modulo, modulo_id: verificarModulo.id}).where({id})
+      const aulaAtualizada = await knex('aulas').update({nome, data, modulo: verificarModulo.nome, modulo_id: verificarModulo.id}).where({id})
 
       if(aulaAtualizada === 0) {
         return res.status(400).json('Não foi possível atualizar a aula.');
