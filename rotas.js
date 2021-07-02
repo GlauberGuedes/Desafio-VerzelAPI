@@ -13,7 +13,7 @@ rotas.post('/cadastro', cadastro.CadastrarUsuario);
 rotas.post('/login', login.loginUsuario);
 
 rotas.get('/modulos', modulo.listasModulos);
-rotas.get('/aulas/:modulo', aula.listasAulas);
+rotas.get('/aulas', aula.listasAulas);
 
 rotas.use(verificarToken);
 

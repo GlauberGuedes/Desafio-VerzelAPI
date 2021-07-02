@@ -1,7 +1,7 @@
 const knex = require("../conexao");
 
 const listasAulas = async (req, res) => {
-  const { modulo } = req.params;
+  const { modulo } = req.query;
   try{
     if (modulo) {
       const aulas = await knex('aulas').where({ modulo }).orderBy('nome');
@@ -10,7 +10,7 @@ const listasAulas = async (req, res) => {
     }
     const aulas = await knex('aulas').orderBy('nome');
 
-    res.json(aulas);
+    return res.json(aulas);
   }catch(error) {
     return res.status(400).json(error.message)
   }
