@@ -22,6 +22,12 @@ const cadastrarModulo = async (req, res) => {
   }
 
   try {
+    const verificarModulo = await knex('modulos').where('nome', 'ilike', nome);
+
+    if(verificarModulo) {
+      return res.status(400).json('Já existe um módulo com este nome.')
+    }
+
     const modulo = await knex('modulos').insert({ nome }).returning('*');
 
     if(!modulo) {
