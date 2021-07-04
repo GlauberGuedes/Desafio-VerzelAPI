@@ -20,10 +20,10 @@ const cadastrarModulo = async (req, res) => {
   if(!nome) {
     res.status(400).json('O campo nome é obrigatório.')
   }
-
+ 
   try {
-    const verificarModulo = await knex('modulos').where('nome', 'ilike', nome);
-
+    const verificarModulo = await knex('modulos').where('nome', 'ilike', nome).first();
+  
     if(verificarModulo) {
       return res.status(400).json('Já existe um módulo com este nome.')
     }
@@ -55,7 +55,7 @@ const atualizarModulo = async (req, res) => {
       return res.status(404).json('Módulo não encontrado');
     }
 
-    const verificarModulo = await knex('modulos').where('nome', 'ilike', nome);
+    const verificarModulo = await knex('modulos').where('nome', 'ilike', nome).first();
 
     if(verificarModulo) {
       return res.status(400).json('Já existe um módulo com este nome.');
