@@ -55,6 +55,12 @@ const atualizarModulo = async (req, res) => {
       return res.status(404).json('Módulo não encontrado');
     }
 
+    const verificarModulo = await knex('modulos').where('nome', 'ilike', nome);
+
+    if(verificarModulo) {
+      return res.status(400).json('Já existe um módulo com este nome.');
+    }
+
     const moduloAtualizado = await knex('modulos').update({nome}).where({id});
 
     if(moduloAtualizado === 0) {
